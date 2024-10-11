@@ -40,8 +40,9 @@
         <div class="control">
           <!-- Add the 'for' element to the label -->
           <label for="biography">Biography</label>
-          <textarea id="biography" name="biography" type="text"></textarea>
-          <span>Include examples on your skills in JavaScript.</span>
+          <!-- Add aria-describedby to add the long description to the textarea element -->
+          <textarea id="biography" name="biography" aria-describedby="biography-desc" type="text"></textarea>
+          <span id="biography-desc">Include examples on your skills in JavaScript.</span>
         </div>
         
         <fieldset>
