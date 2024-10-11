@@ -32,7 +32,9 @@
     <form>
         <div class="control">
           <!-- Add the 'for' attribute to the label -->
-          <label for="name">Full name <span class="required">*</span></label>
+           <!-- Add aria-hidden=true to label asterisk -->
+          <label for="name">Full name <span aria-hidden="true" class="required">*</span></label>
+          <!-- Add required attribute to name input -->
           <input id="name" name="name" type="text" required />
         </div>
         <div class="control">
