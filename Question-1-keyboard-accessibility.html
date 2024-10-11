@@ -206,7 +206,7 @@ article p {
       <nav class="menu">
         <a href="#">Home</a>
         <a href="#">Politics</a>
-        <!-- Removed taborder=-1 from Business a element to ensure it can be navigated over -->
+        <!-- Removed tabindex=-1 from Business a element to ensure it can be navigated over -->
         <a href="#">Business</a>
         <a href="#">Entertainment</a>
         <a href="#">Sports</a>
@@ -215,14 +215,6 @@ article p {
       </nav>
     </div>
   </header>
-  <div class="newsletter">
-    <div class="container">
-      <h3>Like the Funion? Consider joining our newsletter!</h3>
-      <input type="text">
-      <button type="button" onfocus="getFocus()">Sign up</button></div>
-      
-    </div>
-  </div>
   <main class="container">
     <h2 class="offscreen">Top story</h2>
     <article class="main-story">
@@ -288,6 +280,18 @@ article p {
     </div>
     
   </main>
+
+  <footer>
+    <!-- Move newsletter to bottom of HTML structure -->
+    <div class="newsletter">
+      <div class="container">
+        <h3>Like the Funion? Consider joining our newsletter!</h3>
+        <input type="text">
+        <button type="button" onfocus="getFocus()">Sign up</button></div>
+        
+      </div>
+    </div>
+  </footer>
   <!--   stuff can be added here :)
   <footer>
   </footer>
