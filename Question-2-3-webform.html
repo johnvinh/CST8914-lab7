@@ -75,6 +75,7 @@
       ;
       (function () {
         var validateInput;
+        var errorsFound = false;
       
         $.urlParam = function (name) {
           var results;
@@ -93,7 +94,8 @@
       
           if ((value = $.urlParam(input)) === null) {
             if ($('fieldset.errors').length === 0) {
-              $('form').prepend('<fieldset class="errors"><legend>Errors</legend><ul></ul></fieldset>');
+                // Add aria-live=assertive to ul element
+              $('form').prepend('<fieldset class="errors"><legend>Errors</legend><ul aria-live="assertive"></ul></fieldset>');
             }
       
             $referencedElement = null;
@@ -109,19 +111,24 @@
               $referencedElement = $input;
             }
       // R.G. hint: fix next line ;)
-            $error = $('<a>' + message + '</a>');
-            $error.click(function (e) {
-              // If we rely on the link's href pointing to the input's ID, it doesn't trigger forms mode in screen readers
-              $referencedElement.focus();
-              return e.preventDefault();
-            });
+            //$error = $('<a>' + message + '</a>');
+              // Add href with id of source of error
+              $error = $('<a href="#' + $referencedElement.attr('id') + '">' + message + '</a>');
+            // $error.click(function (e) {
+            //   // If we rely on the link's href pointing to the input's ID, it doesn't trigger forms mode in screen readers
+            //   $referencedElement.focus();
+            //   return e.preventDefault();
+            // });
             $elementToDescribe.attr('aria-describedby', input + '_description');
             $errorContainer.append('<li>').find('li:last').append($error);
       
             if ($(':not(form):focus').length === 0) {
               // See https://stackoverflow.com/questions/46134247/jquery-setting-focus-doesnt-work-in-ie11/
-            
+                // Focus on the error message
+                $('fieldset.errors').attr('tabindex', -1).focus();
             }
+
+            errorsFound = true;
           } else {
             if ($input.is(':checkbox')) {
               $input.attr('checked', true);
@@ -142,7 +149,7 @@
             validateInput('gender', 'Please tell us your gender!');
             validateInput('accept_agbs', 'You must accept our terms and conditions!');
       
-            if ($('.error').length === 0) {
+            if (!errorsFound) {
               return alert('All inputs are valid.');
             }
           }
